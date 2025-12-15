@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class element1 : MonoBehaviour
 {
-   
+
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,10 +16,12 @@ public class element1 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             Manolita.Instance.BetterWorld();
+            transform.rotation *= Quaternion.Euler(20,0,0);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
             Manolita.Instance.WorseWorld();
+            transform.rotation *= Quaternion.Euler(-20, 0, 0);
         }
     }
     

@@ -9,6 +9,7 @@ public class Manolita : MonoBehaviour
     public static Action<Manolita> OnWorseWorld;
     public static Action<Manolita> OnBetterWorld;
     public float WorldState = 1f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
