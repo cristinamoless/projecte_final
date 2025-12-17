@@ -13,12 +13,12 @@ public class cabana : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Manolita.Instance.BetterWorld();
+            WorldManager.Instance.BetterWorld();
             transform.localScale *= 1.20f;
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Manolita.Instance.WorseWorld();
+            WorldManager.Instance.WorseWorld();
             transform.localScale *= 0.80f;
         }
     }

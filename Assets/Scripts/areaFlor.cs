@@ -14,7 +14,7 @@ public class areaFlor : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         flor.accioFlor();
         Debug.Log("Estas a l'area");

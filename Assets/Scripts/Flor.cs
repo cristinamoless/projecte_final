@@ -6,30 +6,35 @@ public class Flor : MonoBehaviour
     public float contadorAccio = 1f;
     public TMP_Text Millor_text = null;
     public TMP_Text Pitjor_text = null;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        Millor_text.text = " ";
+        Pitjor_text.text = " ";
     }
-
     public void accioFlor()
     {
-        if (Input.GetKeyDown(KeyCode.P) && contadorAccio != 2f)
+        while(contadorAccio != 2f)
         {
-            Manolita.Instance.BetterWorld();
-            transform.rotation *= Quaternion.Euler(20, 0, 0);
-            contadorAccio = 2f;
+            Millor_text.text = "Dona-li a la tecla P per fer un encanteri";
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                WorldManager.Instance.BetterWorld();
+                transform.rotation *= Quaternion.Euler(20, 0, 0);
+                contadorAccio = 2f;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.O) && contadorAccio != 0f)
+        
+        while(contadorAccio != 0f)
         {
-            Manolita.Instance.WorseWorld();
-            transform.rotation *= Quaternion.Euler(-20, 0, 0);
-            contadorAccio = 0f;
-        }
+            Pitjor_text.text = "O dona-li a la tecla O per fer una maledicció";
+            if (Input.GetKeyDown(KeyCode.O) && contadorAccio != 0f)
+            {
+                WorldManager.Instance.WorseWorld();
+                transform.rotation *= Quaternion.Euler(-20, 0, 0);
+                contadorAccio = 0f;
+
+            }
+        } 
     }
 }

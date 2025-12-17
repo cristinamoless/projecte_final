@@ -1,13 +1,12 @@
 using UnityEngine;
 using System;
 
-public class Manolita : MonoBehaviour
+public class WorldManager : MonoBehaviour
 {
-    public static Manolita Instance;
+    public static WorldManager Instance;
 
-    public GameObject Player;
-    public static Action<Manolita> OnWorseWorld;
-    public static Action<Manolita> OnBetterWorld;
+    public static Action<WorldManager> OnWorseWorld;
+    public static Action<WorldManager> OnBetterWorld;
     public float WorldState = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,16 +18,6 @@ public class Manolita : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        Player = GetComponent<GameObject>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void WorseWorld()
     {
         OnWorseWorld?.Invoke(this);

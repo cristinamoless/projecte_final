@@ -3,7 +3,7 @@ using System;
 
 public class PlayerControl : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public WorldManager _manolita;
     public float Speed = 4.2f;
     public float Gravity = -15;
 
@@ -62,6 +62,7 @@ public class PlayerControl : MonoBehaviour
     }
     private float GetGravity()
     {
+        Gravity *= _manolita.WorldState;
         return Gravity * Time.deltaTime;
     }
 
