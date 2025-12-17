@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8db6d8d3ca594e4ebe49699a4b095b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _world: {fileID: 1918669880}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,7 +1688,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _manolita: {fileID: 1918669880}
-  Speed: 4.2
   Gravity: -15
   GroundSmooth: 0.5
   TurnSmooth: 0.01

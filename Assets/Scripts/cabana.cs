@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class cabana : MonoBehaviour
 {
+    public WorldManager _world;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,6 +12,8 @@ public class cabana : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.localScale *= _world.WorldState;
+        /*
         if (Input.GetKeyDown(KeyCode.K))
         {
             WorldManager.Instance.BetterWorld();
@@ -20,6 +23,6 @@ public class cabana : MonoBehaviour
         {
             WorldManager.Instance.WorseWorld();
             transform.localScale *= 0.80f;
-        }
+        }*/
     }
 }

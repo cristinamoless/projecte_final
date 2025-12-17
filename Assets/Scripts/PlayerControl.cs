@@ -4,7 +4,6 @@ using System;
 public class PlayerControl : MonoBehaviour
 {
     public WorldManager _manolita;
-    public float Speed = 4.2f;
     public float Gravity = -15;
 
     public float GroundSmooth = 0.5f;
@@ -31,7 +30,7 @@ public class PlayerControl : MonoBehaviour
     private void Move()
     {
         var target_velocity = (_input.MoveInput.x * transform.right +
-            _input.MoveInput.y * transform.forward) * Speed;
+            _input.MoveInput.y * transform.forward) * (4* _manolita.WorldState);
 
         var velocity = Vector3.Lerp(_lastVelocity, target_velocity, 0.7f);
 
@@ -62,7 +61,6 @@ public class PlayerControl : MonoBehaviour
     }
     private float GetGravity()
     {
-        Gravity *= _manolita.WorldState;
         return Gravity * Time.deltaTime;
     }
 
