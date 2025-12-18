@@ -3,26 +3,27 @@ using UnityEngine;
 public class cabana : MonoBehaviour
 {
     public WorldManager _world;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector3 baseScale;
+
     void Start()
     {
-        
+        baseScale = transform.localScale;
+    }
+    private void OnEnable()
+    {
+        WorldManager.OnBetterWorld += canviEscala;
+        WorldManager.OnWorseWorld += canviEscala;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        transform.localScale *= _world.WorldState;
-        /*
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            WorldManager.Instance.BetterWorld();
-            transform.localScale *= 1.20f;
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            WorldManager.Instance.WorseWorld();
-            transform.localScale *= 0.80f;
-        }*/
+        WorldManager.OnBetterWorld -= canviEscala;
+        WorldManager.OnWorseWorld -= canviEscala;
+    }
+
+    private void canviEscala(WorldManager wm)
+    {
+        transform.localScale = (baseScale * wm.WorldState);
     }
 }
+
