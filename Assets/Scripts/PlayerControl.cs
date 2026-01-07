@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     CharacterController _controller;
     InputHandler _input;
 
-    Vector3 _lastVelocity;
+    public Vector3 _lastVelocity;
 
     public Vector3 _externalForces;
     void Start()
