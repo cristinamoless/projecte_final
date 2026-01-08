@@ -1,26 +1,16 @@
 using UnityEngine;
-using System;
 
 public class InputHandler : MonoBehaviour
 {
-    public Vector2 MoveInput;
-
-    public bool Jump;
+    public Vector2 MoveInput { get; private set; }
 
     void Update()
     {
-        MoveInput.x = Input.GetAxis("Horizontal");
-        MoveInput.y = Input.GetAxis("Vertical");
+        float h = Input.GetAxisRaw("Horizontal"); // A / D
+        float v = Input.GetAxisRaw("Vertical");   // W / S
 
-        Jump = Input.GetKeyDown(KeyCode.Space);
-    }
-
-    public Vector3 GetInputInHorizontalPlane()
-    {
-        return new Vector3(MoveInput.x, 0, MoveInput.y);
-    }
-    public Vector3 GetInputInVerticalPlane()
-    {
-        return new Vector3(MoveInput.x, MoveInput.y, 0);
+        MoveInput = new Vector2(h, v);
+        MoveInput = Vector2.ClampMagnitude(MoveInput, 1f);
     }
 }
+

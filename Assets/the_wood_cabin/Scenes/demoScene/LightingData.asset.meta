@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f45a41443cf5f2c4c985cd771bae0360
+timeCreated: 1498119403
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67759
+  packageName: The Wood Cabin
+  packageVersion: 1.1
+  assetPath: Assets/the_wood_cabin/Scenes/demoScene/LightingData.asset
+  uploadId: 186267

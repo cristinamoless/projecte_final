@@ -4,18 +4,19 @@ using System;
 public class PlayerControl : MonoBehaviour
 {
     public WorldManager _manolita;
+
     public float Gravity = -15;
-
     public float GroundSmooth = 0.5f;
-
     public float TurnSmooth = 0.01f;
+
+    public Transform cameraTransform;
 
     CharacterController _controller;
     InputHandler _input;
 
     public Vector3 _lastVelocity;
-
     public Vector3 _externalForces;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -29,8 +30,19 @@ public class PlayerControl : MonoBehaviour
 
     private void Move()
     {
-        var target_velocity = (_input.MoveInput.x * transform.right +
-            _input.MoveInput.y * transform.forward) * (4* _manolita.WorldState);
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
+
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        var target_velocity =
+            (_input.MoveInput.x * camRight +
+             _input.MoveInput.y * camForward) *
+            (4 * _manolita.WorldState);
 
         var velocity = Vector3.Lerp(_lastVelocity, target_velocity, 0.7f);
 
@@ -59,10 +71,9 @@ public class PlayerControl : MonoBehaviour
         Vector3 look = Vector3.Lerp(current, target, TurnSmooth);
         transform.LookAt(look);
     }
+
     private float GetGravity()
     {
         return Gravity * Time.deltaTime;
     }
-
-
 }
