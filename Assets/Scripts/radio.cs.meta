@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c60340f629c94024693c8af9cf94785a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - Millor_text: {instanceID: 0}
+  - Pitjor_text: {instanceID: 0}
+  - canal1: {fileID: 8300000, guid: 6ae40053c210ce14293675924e93e7e9, type: 3}
+  - canal2: {fileID: 8300000, guid: 61211e946b59f294a80edf18d92bef18, type: 3}
+  - canal3: {fileID: 8300000, guid: 501fce963de6e4140a55d3f095720d3f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
