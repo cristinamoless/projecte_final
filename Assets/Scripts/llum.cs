@@ -22,10 +22,11 @@ public class llum : MonoBehaviour
         if (wm.WorldState > 1f)
         {
             luz.color = Color.Lerp(blanc, taronja, wm.WorldState - 1f);
-            if (wm.WorldState == 1f)
-            {
-                luz.color = blanc;
-            }
+            
+        }
+        if (wm.WorldState == 1f)
+        {
+            luz.color = blanc;
         }
     }
 

@@ -19,16 +19,16 @@ public class Flor : MonoBehaviour, IInteractable
         if (contadorAccio != 2f)
         {
             Millor_text.text = "Prem la tecla P per fer un encanteri";
-            if (Input.GetKey(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 Animator.SetTrigger("Pickup");
                 WorldManager.Instance.BetterWorld();
 
                 transform.rotation = baseRotation * Quaternion.Euler(20, 0, 0);
-                contadorAccio = 2f;
                 if (contadorAccio == 0f)
                 {
                     WorldManager.Instance.BetterWorld();
+                    contadorAccio = 2f;
                 }
             }
         }
@@ -36,15 +36,15 @@ public class Flor : MonoBehaviour, IInteractable
         if (contadorAccio != 0f)
         {
             Pitjor_text.text = "Prem la tecla O per fer una maledicció";
-            if (Input.GetKey(KeyCode.O) && contadorAccio != 0f)
+            if (Input.GetKeyDown(KeyCode.O) && contadorAccio != 0f)
             {
                 Animator.SetTrigger("Pickup");
                 WorldManager.Instance.WorseWorld();
                 transform.rotation = baseRotation * Quaternion.Euler(-20, 0, 0);
-                contadorAccio = 0f;
                 if (contadorAccio == 2f)
                 {
                     WorldManager.Instance.WorseWorld();
+                    contadorAccio = 0f;
                 }
             }
         }

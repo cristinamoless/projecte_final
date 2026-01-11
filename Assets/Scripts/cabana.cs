@@ -4,7 +4,7 @@ public class cabana : MonoBehaviour
 {
     private Vector3 baseScale;
 
-    void Start()
+    void Awake()
     {
         baseScale = transform.localScale;
         WorldManager.OnBetterWorld += canviEscala;

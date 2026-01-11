@@ -4,6 +4,7 @@ using TMPro;
 public class Radio : MonoBehaviour, IInteractable
 {
     public AudioSource audioSource;
+    public float contadorAccio = 1f;
 
     public TMP_Text Millor_text;
     public TMP_Text Pitjor_text;
@@ -12,56 +13,53 @@ public class Radio : MonoBehaviour, IInteractable
     public AudioClip canal2;
     public AudioClip canal3;
 
-    private bool inRange = false;
-
     private void Awake()
     {
         buidaText();
         if (audioSource == null)
+        {
             audioSource = GetComponent<AudioSource>();
+        }
+        SetCanal(canal3);
     }
 
-    private void Update()
-    {
-        if (!inRange) return;
-
-        // Text general
-        Millor_text.text = "Prem 1, 2 o 3 per canviar de canal";
-        Pitjor_text.text = "";
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetCanal(canal1);
-            WorldManager.Instance.BetterWorld();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetCanal(canal2);
-            WorldManager.Instance.WorseWorld();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetCanal(canal3);
-            // Aquí decideixes quin món afecta el 3
-            // WorldManager.Instance.NeutralWorld();
-        }
-    }
-
-    // Cridat per InteractionArea.OnTriggerEnter
     public void Interact()
     {
-        inRange = true;
-        Millor_text.text = "Prem 1, 2 o 3 per canviar de canal";
-        Pitjor_text.text = "";
+        buidaText();
+        if (contadorAccio != 2f)
+        {
+            Millor_text.text = "Prem la tecla 1 per posar el canal de l'Emerald City";
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                SetCanal(canal1);
+                WorldManager.Instance.BetterWorld();
+                if (contadorAccio == 0f)
+                {
+                    WorldManager.Instance.BetterWorld();
+                }
+                contadorAccio = 2f;
+            }
+        }
+        if (contadorAccio != 0f)
+        {
+            Pitjor_text.text = "Prem la tecla 2 per posar el canal del Upside Down";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SetCanal(canal2);
+                WorldManager.Instance.WorseWorld();
+                if (contadorAccio == 2f)
+                {
+                    WorldManager.Instance.WorseWorld();
+                }
+                contadorAccio = 0f;
+            }
+        }
     }
 
-    // Cridat per InteractionArea.OnTriggerExit
     public void fiInteract()
     {
-        inRange = false;
         buidaText();
     }
-
     private void SetCanal(AudioClip clip)
     {
         if (clip == null || audioSource == null) return;
@@ -71,10 +69,10 @@ public class Radio : MonoBehaviour, IInteractable
         audioSource.clip = clip;
         audioSource.Play();
     }
-
     public void buidaText()
     {
-        Millor_text.text = "";
-        Pitjor_text.text = "";
+        Millor_text.text = " ";
+        Pitjor_text.text = " ";
     }
+
 }
