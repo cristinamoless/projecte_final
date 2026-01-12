@@ -107,7 +107,7 @@ public class Animal : MonoBehaviour, IInteractable
 
         _isGrounded = controller.isGrounded;
 
-        if (WorldManager.Instance.WorldState > 1f)
+        if (contadorAccio == 2)
         {
             direction = player.position - transform.position;
 
@@ -118,7 +118,7 @@ public class Animal : MonoBehaviour, IInteractable
                 return;
             }
         }
-        else if (WorldManager.Instance.WorldState < 1f)
+        else if (contadorAccio == 0)
         {
             direction = transform.position - player.position;
         }
@@ -142,6 +142,7 @@ public class Animal : MonoBehaviour, IInteractable
 
         controller.Move(move * Time.deltaTime);
 
+        // Rotació suau
         if (direction != Vector3.zero)
         {
             Quaternion targetRot = Quaternion.LookRotation(direction);
