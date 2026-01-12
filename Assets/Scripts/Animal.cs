@@ -29,15 +29,15 @@ public class Animal : MonoBehaviour, IInteractable
         buidaText();
         if (contadorAccio == 1)
         {
-            Millor_text.text = "Prem R per fer-te amic dels animals";
-            if (Input.GetKeyDown(KeyCode.R))
+            Millor_text.text = "Prem 1 per fer-te amic dels animals";
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 WorldManager.Instance.BetterWorld();
                 direction = player.position - transform.position;
                 contadorAccio++;
             }
-            Pitjor_text.text = "Prem Y per espantar els animals";
-            if (Input.GetKeyDown(KeyCode.Y))
+            Pitjor_text.text = "Prem 2 per espantar els animals";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 WorldManager.Instance.WorseWorld();
                 direction = transform.position - player.position;

@@ -645,7 +645,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mixamo_com
+  m_Name: hap abck walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1011,7 +1011,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mixamo_com
+  m_Name: hap walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1457,7 +1457,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mixamo_com
+  m_Name: inj walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1512,7 +1512,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mixamo_com
+  m_Name: inj walk back
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
