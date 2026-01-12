@@ -5,6 +5,7 @@ public class Radio : MonoBehaviour, IInteractable
 {
     public AudioSource audioSource;
     public float contadorAccio = 1f;
+    public Animator Animator;
 
     public TMP_Text Millor_text;
     public TMP_Text Pitjor_text;
@@ -12,7 +13,6 @@ public class Radio : MonoBehaviour, IInteractable
     public AudioClip canal1;
     public AudioClip canal2;
     public AudioClip canal3;
-    public Animator animator;
 
     private void Awake()
     {
@@ -27,34 +27,63 @@ public class Radio : MonoBehaviour, IInteractable
     public void Interact()
     {
         buidaText();
-        if (contadorAccio != 2f)
+        if (contadorAccio == 1)
         {
             Millor_text.text = "Prem la tecla 1 per posar el canal de l'Emerald City";
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                animator.SetTrigger("Pickup");
-                SetCanal(canal1);
+                Animator.SetTrigger("Pickup");
                 WorldManager.Instance.BetterWorld();
-                if (contadorAccio == 0f)
-                {
-                    WorldManager.Instance.BetterWorld();
-                }
-                contadorAccio = 2f;
+                SetCanal(canal1);
+                contadorAccio++;
             }
-        }
-        if (contadorAccio != 0f)
-        {
             Pitjor_text.text = "Prem la tecla 2 per posar el canal del Upside Down";
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                animator.SetTrigger("Pickup");
-                SetCanal(canal2);
+                Animator.SetTrigger("Pickup");
                 WorldManager.Instance.WorseWorld();
-                if (contadorAccio == 2f)
-                {
-                    WorldManager.Instance.WorseWorld();
-                }
-                contadorAccio = 0f;
+                SetCanal(canal2);
+                contadorAccio--;
+            }
+        }
+        if (contadorAccio == 0)
+        {
+            Millor_text.text = "Prem la tecla 1 per posar el canal de l'Emerald City";
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.BetterWorld();
+                WorldManager.Instance.BetterWorld();
+                SetCanal(canal1);
+                contadorAccio = 2;
+            }
+            Pitjor_text.text = "Prem la tecla 3 per posar el canal normal";
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.BetterWorld();
+                SetCanal(canal3);
+                contadorAccio++;
+            }
+        }
+        if (contadorAccio == 2)
+        {
+            Millor_text.text = "Prem la tecla 3 per posar el canal normal";
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.WorseWorld();
+                SetCanal(canal3);
+                contadorAccio--;
+            }
+            Pitjor_text.text = "Prem la tecla 2 per posar el canal del Upside Down";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.WorseWorld();
+                WorldManager.Instance.WorseWorld();
+                SetCanal(canal2);
+                contadorAccio = 0;
             }
         }
     }

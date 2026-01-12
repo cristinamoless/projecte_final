@@ -88,8 +88,8 @@ public class particules : MonoBehaviour, IInteractable
             }
      if (contadorAccio != 2f)
         {
-            Millor_text.text = "Prem la tecla U per deixar anar les papallones";
-        if (Input.GetKeyDown(KeyCode.U))
+            Millor_text.text = "Prem la tecla 1 per deixar anar les papallones";
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             animator.SetTrigger("Pickup");
             WorldManager.Instance.BetterWorld();
@@ -108,8 +108,8 @@ public class particules : MonoBehaviour, IInteractable
       }
      if (contadorAccio != 0f)
        {
-        Pitjor_text.text = "Prem la tecla I per deixar anar les mosques";
-        if (Input.GetKeyDown(KeyCode.I))
+        Pitjor_text.text = "Prem la tecla 2 per deixar anar les mosques";
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             animator.SetTrigger("Pickup");
             WorldManager.Instance.WorseWorld();

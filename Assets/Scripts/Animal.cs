@@ -46,15 +46,15 @@ public class Animal : MonoBehaviour, IInteractable
         }
         if (contadorAccio == 0)
         {
-            Millor_text.text = "Prem R per fer-te amic dels animals";
-            if (Input.GetKeyDown(KeyCode.R))
+            Millor_text.text = "Prem 1 per fer-te amic dels animals";
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 WorldManager.Instance.BetterWorld();
                 WorldManager.Instance.BetterWorld();
                 contadorAccio = 2;
             }
-            Pitjor_text.text = "Prem T per deixar tranquils als animals";
-            if (Input.GetKeyDown(KeyCode.T))
+            Pitjor_text.text = "Prem 2 per deixar tranquils als animals";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 WorldManager.Instance.BetterWorld();
                 animator.SetFloat("speed", 0f);
@@ -63,15 +63,15 @@ public class Animal : MonoBehaviour, IInteractable
         }
         if (contadorAccio == 2)
         {
-            Millor_text.text = "Prem T per deixar tranquils als animals";
-            if (Input.GetKeyDown(KeyCode.T))
+            Millor_text.text = "Prem 2 per deixar tranquils als animals";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 WorldManager.Instance.WorseWorld();
                 animator.SetFloat("speed", 0f);
                 contadorAccio--;
             }
-            Pitjor_text.text = "Prem Y per espantar els animals";
-            if (Input.GetKeyDown(KeyCode.Y))
+            Pitjor_text.text = "Prem 3 per espantar els animals";
+            if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 WorldManager.Instance.WorseWorld();
                 WorldManager.Instance.WorseWorld();

@@ -12,18 +12,14 @@ public class FlorManager : MonoBehaviour, IInteractable
     private void Start()
     {
         flors = FindObjectsOfType<Flor>();
-
     }
-
-
-
     public void Interact()
     {
         buidaText();
         if (contadorAccio != 2f)
         {
-            Millor_text.text = "Prem la tecla P per fer un encanteri";
-            if (Input.GetKeyDown(KeyCode.P))
+            Millor_text.text = "Prem la tecla 1 per fer un encanteri";
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Animator.SetTrigger("Pickup");
                 WorldManager.Instance.BetterWorld();
@@ -43,8 +39,8 @@ public class FlorManager : MonoBehaviour, IInteractable
 
         if (contadorAccio != 0f)
         {
-            Pitjor_text.text = "Prem la tecla O per fer una maledicció";
-            if (Input.GetKeyDown(KeyCode.O) && contadorAccio != 0f)
+            Pitjor_text.text = "Prem la tecla 2 per fer una maledicció";
+            if (Input.GetKeyDown(KeyCode.Alpha2) && contadorAccio != 0f)
             {
                 Animator.SetTrigger("Pickup");
                 WorldManager.Instance.WorseWorld();
