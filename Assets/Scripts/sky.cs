@@ -23,20 +23,27 @@ public class sky : MonoBehaviour
     private void CanviaCel(WorldManager wm)
     {
         float state = wm.WorldState;
+        Material target;
 
         if (state < 1f)
         {
-            RenderSettings.skybox.Lerp(worseWorldSkybox, neutralWorldSkybox, state / 1f);
+            target = worseWorldSkybox;
         }
         else if (state > 1f)
         {
-            RenderSettings.skybox.Lerp(neutralWorldSkybox, betterWorldSkybox, (state - 1f) / 1f);
+            target = betterWorldSkybox;
         }
         else
         {
-            RenderSettings.skybox = neutralWorldSkybox;
+            target = neutralWorldSkybox;
         }
 
-        DynamicGI.UpdateEnvironment();
+        if (target != null)
+        {
+            RenderSettings.skybox = target;
+            DynamicGI.UpdateEnvironment();
+        }
     }
 }
+
+

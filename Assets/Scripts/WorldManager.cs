@@ -20,12 +20,12 @@ public class WorldManager : MonoBehaviour
 
     public void WorseWorld()
     {
-        OnWorseWorld?.Invoke(this);
         WorldState -= 0.2f;
+        OnWorseWorld?.Invoke(this);
     }
     public void BetterWorld()
     {
-        OnBetterWorld?.Invoke(this);
         WorldState += 0.2f;
+        OnBetterWorld?.Invoke(this);
     }
 }
