@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -8,19 +7,24 @@ public class PlayerControl : MonoBehaviour
     public float Gravity = -15;
     public float GroundSmooth = 0.5f;
     public float TurnSmooth = 0.01f;
+    public float JumpForce = 7f;
 
     public Transform cameraTransform;
 
     CharacterController _controller;
     InputHandler _input;
+    Animator _animator;
 
     public Vector3 _lastVelocity;
     public Vector3 _externalForces;
+
+    bool _isGrounded;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _input = GetComponent<InputHandler>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -30,6 +34,13 @@ public class PlayerControl : MonoBehaviour
 
     private void Move()
     {
+        _isGrounded = _controller.isGrounded;
+
+        if (_isGrounded && _lastVelocity.y < 0)
+        {
+            _lastVelocity.y = -2f;
+        }
+
         Vector3 camForward = cameraTransform.forward;
         Vector3 camRight = cameraTransform.right;
 
@@ -47,8 +58,15 @@ public class PlayerControl : MonoBehaviour
         var velocity = Vector3.Lerp(_lastVelocity, target_velocity, 0.7f);
 
         velocity.y = _lastVelocity.y;
-        velocity.y += GetGravity();
 
+        // SALT
+        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            velocity.y = JumpForce;
+            _animator.SetTrigger("jump");
+        }
+
+        velocity.y += GetGravity();
         velocity += _externalForces;
 
         _controller.Move(velocity * Time.deltaTime);
@@ -60,6 +78,10 @@ public class PlayerControl : MonoBehaviour
         {
             Turn(velocity);
         }
+
+        // ANIMATOR
+        _animator.SetBool("Grounded", _isGrounded);
+        _animator.SetFloat("verticalVelocity", _lastVelocity.y);
     }
 
     private void Turn(Vector3 dir)

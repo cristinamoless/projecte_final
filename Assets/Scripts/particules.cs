@@ -12,7 +12,7 @@ public class particules : MonoBehaviour, IInteractable
     public float contadorAccio = 1f;
     public TMP_Text Millor_text;
     public TMP_Text Pitjor_text;
-
+    public Animator animator;
     void Start()
     {
      buidaText();
@@ -82,15 +82,16 @@ public class particules : MonoBehaviour, IInteractable
     public void Interact(){
      buidaText();
             if (Input.GetKeyDown(KeyCode.Space))
-        {
+            {
             mosca.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             butterfly.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
+            }
      if (contadorAccio != 2f)
         {
-            Millor_text.text = "Prem la tecla U per deixar anar les papallo es";
+            Millor_text.text = "Prem la tecla U per deixar anar les papallones";
         if (Input.GetKeyDown(KeyCode.U))
         {
+            animator.SetTrigger("Pickup");
             WorldManager.Instance.BetterWorld();
             activacioUtopic = true;
             activacioDistopic = false;
@@ -104,12 +105,13 @@ public class particules : MonoBehaviour, IInteractable
                 }
             contadorAccio = 2f;
         }
-   }
+      }
      if (contadorAccio != 0f)
        {
         Pitjor_text.text = "Prem la tecla I per deixar anar les mosques";
         if (Input.GetKeyDown(KeyCode.I))
         {
+            animator.SetTrigger("Pickup");
             WorldManager.Instance.WorseWorld();
             activacioUtopic = false;
             activacioDistopic = true;

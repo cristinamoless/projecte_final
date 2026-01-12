@@ -11771,6 +11771,7 @@ MonoBehaviour:
   canal1: {fileID: 8300000, guid: 501fce963de6e4140a55d3f095720d3f, type: 3}
   canal2: {fileID: 8300000, guid: 6ae40053c210ce14293675924e93e7e9, type: 3}
   canal3: {fileID: 8300000, guid: 61211e946b59f294a80edf18d92bef18, type: 3}
+  animator: {fileID: 1705486574}
 --- !u!4 &1053805844
 Transform:
   m_ObjectHideFlags: 0
@@ -13250,6 +13251,7 @@ MonoBehaviour:
   Gravity: -15
   GroundSmooth: 0.5
   TurnSmooth: 0.01
+  JumpForce: 7
   cameraTransform: {fileID: 877213664}
   _lastVelocity: {x: 0, y: 0, z: 0}
   _externalForces: {x: 0, y: 0, z: 0}
@@ -13351,6 +13353,7 @@ MonoBehaviour:
   contadorAccio: 1
   Millor_text: {fileID: 1249167819}
   Pitjor_text: {fileID: 1238412359}
+  animator: {fileID: 1705486574}
 --- !u!4 &1802400081
 Transform:
   m_ObjectHideFlags: 0

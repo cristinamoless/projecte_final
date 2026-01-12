@@ -12,6 +12,7 @@ public class Radio : MonoBehaviour, IInteractable
     public AudioClip canal1;
     public AudioClip canal2;
     public AudioClip canal3;
+    public Animator animator;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class Radio : MonoBehaviour, IInteractable
             Millor_text.text = "Prem la tecla 1 per posar el canal de l'Emerald City";
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
+                animator.SetTrigger("Pickup");
                 SetCanal(canal1);
                 WorldManager.Instance.BetterWorld();
                 if (contadorAccio == 0f)
@@ -45,6 +47,7 @@ public class Radio : MonoBehaviour, IInteractable
             Pitjor_text.text = "Prem la tecla 2 per posar el canal del Upside Down";
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
+                animator.SetTrigger("Pickup");
                 SetCanal(canal2);
                 WorldManager.Instance.WorseWorld();
                 if (contadorAccio == 2f)
