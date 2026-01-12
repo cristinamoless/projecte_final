@@ -57,13 +57,22 @@ public class PlayerControl : MonoBehaviour
         camForward.Normalize();
         camRight.Normalize();
 
+        Vector2 moveInput = _input.MoveInput;
+
+        //INVERTIR CONTROLS
+        if (Mathf.Approximately(_manolita.WorldState, 0f))
+        {
+            moveInput *= -1f;
+        }
+
+        float speed = 4f;
+
         var target_velocity =
-            (_input.MoveInput.x * camRight +
-             _input.MoveInput.y * camForward) *
-            (4 * _manolita.WorldState);
+            (moveInput.x * camRight +
+             moveInput.y * camForward) *
+            speed;
 
         var velocity = Vector3.Lerp(_lastVelocity, target_velocity, 0.7f);
-
         velocity.y = _lastVelocity.y;
 
         // SALT

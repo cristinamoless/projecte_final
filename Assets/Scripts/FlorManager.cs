@@ -13,49 +13,89 @@ public class FlorManager : MonoBehaviour, IInteractable
     {
         flors = FindObjectsOfType<Flor>();
     }
+
+
     public void Interact()
     {
         buidaText();
-        if (contadorAccio != 2f)
+        if (contadorAccio == 1)
         {
             Millor_text.text = "Prem la tecla 1 per fer un encanteri";
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Animator.SetTrigger("Pickup");
                 WorldManager.Instance.BetterWorld();
-
                 foreach (Flor flor in flors)
                 {
-                    transform.rotation = flor.baseRotation * Quaternion.Euler(20, 0, 0);
-                }
-                if (contadorAccio == 0f)
-                {
-                    WorldManager.Instance.BetterWorld();
-                    contadorAccio++;
+                    flor.transform.rotation = flor.baseRotation * Quaternion.Euler(20, 0, 0);
                 }
                 contadorAccio++;
             }
-        }
-
-        if (contadorAccio != 0f)
-        {
             Pitjor_text.text = "Prem la tecla 2 per fer una maledicció";
-            if (Input.GetKeyDown(KeyCode.Alpha2) && contadorAccio != 0f)
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 Animator.SetTrigger("Pickup");
                 WorldManager.Instance.WorseWorld();
                 foreach (Flor flor in flors)
                 {
-                    transform.rotation = flor.baseRotation * Quaternion.Euler(-20, 0, 0);
-                }
-                if (contadorAccio == 2f)
-                {
-                    WorldManager.Instance.WorseWorld();
-                    contadorAccio--;
+                    flor.transform.rotation = flor.baseRotation * Quaternion.Euler(-20, 0, 0);
                 }
                 contadorAccio--;
             }
         }
+        if (contadorAccio == 0)
+        {
+            Millor_text.text = "Prem la tecla 1 per fer un encanteri";
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.BetterWorld();
+                WorldManager.Instance.BetterWorld();
+                foreach (Flor flor in flors)
+                {
+                    flor.transform.rotation = flor.baseRotation * Quaternion.Euler(40, 0, 0);
+                }
+                contadorAccio = 2;
+            }
+            Pitjor_text.text = "Prem la tecla 3 per desfer-ho";
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.BetterWorld();
+                foreach (Flor flor in flors)
+                {
+                    flor.transform.rotation = flor.baseRotation * Quaternion.Euler(20, 0, 0);
+                }
+                contadorAccio++;
+            }
+        }
+        if (contadorAccio == 2)
+        {
+            Millor_text.text = "Prem la tecla 3 per desfer-ho";
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.WorseWorld();
+                foreach (Flor flor in flors)
+                {
+                    flor.transform.rotation = flor.baseRotation * Quaternion.Euler(-20, 0, 0);
+                }
+                contadorAccio--;
+            }
+            Pitjor_text.text = "Prem la tecla 2 per fer una maledicció";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Animator.SetTrigger("Pickup");
+                WorldManager.Instance.WorseWorld();
+                WorldManager.Instance.WorseWorld();
+                foreach (Flor flor in flors)
+                {
+                    flor.transform.rotation = flor.baseRotation * Quaternion.Euler(-40, 0, 0);
+                }
+                contadorAccio = 0;
+            }
+        }
+
     }
     public void fiInteract()
     {

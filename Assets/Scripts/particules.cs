@@ -15,7 +15,7 @@ public class particules : MonoBehaviour, IInteractable
     public Animator animator;
     void Start()
     {
-     buidaText();
+        buidaText();
         butterfly.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         mosca.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
@@ -79,60 +79,86 @@ public class particules : MonoBehaviour, IInteractable
         ps.Stop(false, ParticleSystemStopBehavior.StopEmitting);
     }
 
-    public void Interact(){
-     buidaText();
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-            mosca.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            butterfly.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            }
-     if (contadorAccio != 2f)
+    public void Interact()
+    {
+        buidaText();
+        if (contadorAccio == 1)
         {
             Millor_text.text = "Prem la tecla 1 per deixar anar les papallones";
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            animator.SetTrigger("Pickup");
-            WorldManager.Instance.BetterWorld();
-            activacioUtopic = true;
-            activacioDistopic = false;
-            mosca.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            
-            EmissioParticules(butterfly, 15f);
-            
-                if (contadorAccio == 0f)
-                {
-                    WorldManager.Instance.BetterWorld();
-                }
-            contadorAccio = 2f;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                animator.SetTrigger("Pickup");
+                WorldManager.Instance.BetterWorld();
+                activacioUtopic = true;
+                EmissioParticules(butterfly, 15f);
+                contadorAccio++;
+            }
+            Pitjor_text.text = "Prem la tecla 2 per deixar anar les mosques";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                animator.SetTrigger("Pickup");
+                WorldManager.Instance.WorseWorld();
+                activacioDistopic = true;
+                EmissioParticules(mosca, 15f);
+                contadorAccio--;
+            }
         }
-      }
-     if (contadorAccio != 0f)
-       {
-        Pitjor_text.text = "Prem la tecla 2 per deixar anar les mosques";
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (contadorAccio == 0)
         {
-            animator.SetTrigger("Pickup");
-            WorldManager.Instance.WorseWorld();
-            activacioUtopic = false;
-            activacioDistopic = true;
-            butterfly.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            
-            EmissioParticules(mosca, 15f);
-           if (contadorAccio == 2f)
-                {
-                    WorldManager.Instance.WorseWorld();
-                }
-            contadorAccio = 0f;
+            Millor_text.text = "Prem la tecla 1 per deixar anar les papallones";
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                WorldManager.Instance.BetterWorld();
+                activacioUtopic = true;
+                activacioDistopic = false;
+                mosca.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                EmissioParticules(butterfly, 15f);
+                contadorAccio = 2;
+            }
+            Pitjor_text.text = "Prem la tecla 3 per capturar les mosques ";
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                animator.SetTrigger("Pickup");
+                WorldManager.Instance.BetterWorld();
+                activacioUtopic = false;
+                activacioDistopic = false;
+                mosca.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                contadorAccio++;
+            }
         }
-       }
+        if (contadorAccio == 2)
+        {
+            Millor_text.text = "Prem la tecla 3 per capturar les papallones";
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                animator.SetTrigger("Pickup");
+                WorldManager.Instance.WorseWorld();
+                activacioUtopic = false;
+                activacioDistopic = false;
+                butterfly.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                contadorAccio--;
+            }
+            Pitjor_text.text = "Prem la tecla 2 per deixar anar les mosques";
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                animator.SetTrigger("Pickup");
+                WorldManager.Instance.WorseWorld();
+                activacioUtopic = false;
+                activacioDistopic = true;
+                butterfly.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                EmissioParticules(mosca, 15f);
+                contadorAccio = 0;
+            }
+        }
+
     }
     public void fiInteract()
     {
         buidaText();
     }
-    public void buidaText(){
-	 Millor_text.text = " ";
+    public void buidaText()
+    {
+        Millor_text.text = " ";
         Pitjor_text.text = " ";
     }
-
 }
