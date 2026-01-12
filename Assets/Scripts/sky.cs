@@ -1,58 +1,42 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class SkyboxController : MonoBehaviour
+public class sky : MonoBehaviour
 {
     public Material worseWorldSkybox;
     public Material neutralWorldSkybox;
     public Material betterWorldSkybox;
 
-    public float worseMax = 0.4f;
-    public float neutralMax = 1.6f;
-
     private void OnEnable()
     {
-        WorldManager.OnWorseWorld += HandleWorseWorld;
-        WorldManager.OnBetterWorld += HandleBetterWorld;
+        WorldManager.OnWorseWorld += CanviaCel;
+        WorldManager.OnBetterWorld += CanviaCel;
     }
 
     private void OnDisable()
     {
-        WorldManager.OnWorseWorld -= HandleWorseWorld;
-        WorldManager.OnBetterWorld -= HandleBetterWorld;
+        WorldManager.OnWorseWorld -= CanviaCel;
+        WorldManager.OnBetterWorld -= CanviaCel;
     }
 
-    private void HandleWorseWorld(WorldManager wm)
+    // rep el WorldManager perquè l'event és Action<WorldManager>
+    private void CanviaCel(WorldManager wm)
     {
-        UpdateSkybox(wm.WorldState);
-    }
+        float state = wm.WorldState;
 
-    private void HandleBetterWorld(WorldManager wm)
-    {
-        UpdateSkybox(wm.WorldState);
-    }
-
-    private void UpdateSkybox(float worldState)
-    {
-        Material target;
-
-        if (worldState <= worseMax)
+        if (state < 1f)
         {
-            target = worseWorldSkybox;
+            RenderSettings.skybox.Lerp(worseWorldSkybox, neutralWorldSkybox, state / 1f);
         }
-        else if (worldState <= neutralMax)
+        else if (state > 1f)
         {
-            target = neutralWorldSkybox;
+            RenderSettings.skybox.Lerp(neutralWorldSkybox, betterWorldSkybox, (state - 1f) / 1f);
         }
         else
         {
-            target = betterWorldSkybox;
+            RenderSettings.skybox = neutralWorldSkybox;
         }
 
-        if (target != null)
-        {
-            RenderSettings.skybox = target;
-            DynamicGI.UpdateEnvironment();
-        }
+        DynamicGI.UpdateEnvironment();
     }
 }
