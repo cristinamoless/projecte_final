@@ -20,16 +20,23 @@ public class PlayerControl : MonoBehaviour
 
     bool _isGrounded;
 
+    int _happyLayer;
+    int _injuredLayer;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _input = GetComponent<InputHandler>();
         _animator = GetComponentInChildren<Animator>();
+
+        _happyLayer = _animator.GetLayerIndex("Happy");
+        _injuredLayer = _animator.GetLayerIndex("Injured");
     }
 
     void Update()
     {
         Move();
+        UpdateMoodLayers();
     }
 
     private void Move()
@@ -79,10 +86,23 @@ public class PlayerControl : MonoBehaviour
             Turn(velocity);
         }
 
-        // ANIMATOR
+        // ANIMATOR BASE
         _animator.SetBool("Grounded", _isGrounded);
         _animator.SetFloat("verticalVelocity", _lastVelocity.y);
+        _animator.SetFloat("Speed", new Vector3(velocity.x, 0f, velocity.z).magnitude);
     }
+
+    private void UpdateMoodLayers()
+    {
+        float ws = Mathf.Clamp(_manolita.WorldState, 0f, 2f);
+
+        float injuredWeight = Mathf.Clamp01(1f - ws);
+        float happyWeight = Mathf.Clamp01(ws - 1f);
+
+        _animator.SetLayerWeight(_injuredLayer, injuredWeight);
+        _animator.SetLayerWeight(_happyLayer, happyWeight);
+    }
+
 
     private void Turn(Vector3 dir)
     {
